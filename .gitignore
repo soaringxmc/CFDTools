@@ -11,3 +11,5 @@
 
 # Ignore data files
 **/*.bin
+**/*.g
+**/*.q
