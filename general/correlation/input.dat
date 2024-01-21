@@ -1,0 +1,7 @@
+!---------------- sample ------------------------
+'sample/Probe.U-X.after_trail01'                  ! filename
+!---------------- control parameter -------------
+1							! iter_sta
+12600				  ! iter_end
+!---------------- output control ----------------
+'Correlation/Probe.U-X.after_trail01.correlation'

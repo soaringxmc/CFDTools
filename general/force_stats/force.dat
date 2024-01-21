@@ -1,0 +1,7 @@
+# FORCE NAME force INTERVAL 10 FAZONE wall
+#           1            2            3            4            5            6            7            8            9           10           11           12
+#        step         time         area        f-p-x        f-p-y        f-p-z     f-visc-x     f-visc-y     f-visc-z    f-total-x    f-total-y    f-total-z
+      4302320      508.941     0.426289 1 	0     0 	1  		0	   0					 1  	0	  0   
+      4302330      508.941     0.426289 -1	0     0 	-1 		0	   0    			  -1	0    0  
+      4302340      508.942     0.426289 1 	0    0  	1  		0	  0     			  1 	0   0   
+      4302350      508.942     0.426289 -1	0     0 	-1 		0	   0    			  -1	0    0
