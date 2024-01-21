@@ -1,0 +1,17 @@
+Convert tecplot file *.dat to plot3D *.grd file
+Control File: tecplot2plot3d.txt
+First Content:
+ 
+amount of files wish to convert
+filename1.dat
+filename1.grd
+filename2.dat
+filename2.grd
+......
+
+
+Tecplot Format: ASCII Point
+
+ zone i=          197  j=          129 k= 1
+ x1    y1    z1
+ x2    y2    z2

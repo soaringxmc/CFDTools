@@ -1,0 +1,22 @@
+d3ns.cof  				!input file name
+46739		  				!Start Step					!Iter(NSAWET), Iter(step)
+2									!1-CharLES, 2-NSAWET
+d3ns_unst.cof   	!output filename
+d3ns_stat.cof    	!outpur filename
+!!!!only CharLES!!!!
+1.0 			!Reference density  	(dimensionless)												!CharLES  
+0.21			!Reference velocity  	(dimensionless)	(mach number)
+5.2				!Angle of attack(deg)
+0.2				!Reference area
+
+
+
+
+
+
+
+
+Input 	: InputForceMeanRMS.txt, force.dat
+Output	:	ForceUnst.dat, ForceStats.dat
+
+  

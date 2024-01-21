@@ -1,0 +1,9 @@
+!!Point Number!!!!Element Number and nodes!!!!
+        86697     86016     4
+!!!!!!!!!!Number of variables!!!!!!!!!!!!!!!!!
+            30
+!!!!!!!!!!!!!!!!!File Name!!!!!!!!!!!!!!!!!!!!
+	"y0_slice"
+!!!!!!Start Number!!!!End Number!!!Delta!!!!!!
+      3400000    3400000    10000
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

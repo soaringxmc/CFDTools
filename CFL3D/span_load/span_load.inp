@@ -1,0 +1,45 @@
+--------------Set tecplot filename-----------------
+surface.dat
+-----Set tecplot file format: Variables column-----
+X	Y	Z	I	J	K	Cp
+1	2	3	4	5	6	13
+-----Set zone format: 1 ij format, 2 ijk format----
+2
+------------Set Angle Of Attack (Degree)-----------
+1.48
+-----Set Spanwise direction: 2 for Y, 3 for Z------
+3
+-----Zone list: 0 for all zones, 1 for zone list---
+0
+--------Set positions: number, locations-----------
+30
+-2.96
+-3.848
+-4.736
+-5.624
+-6.512
+-7.4
+-8.288
+-9.176
+-10.064
+-10.952
+-11.84
+-12.728
+-13.616
+-14.504
+-15.392
+-16.28
+-17.168
+-18.056
+-18.944
+-19.832
+-20.72
+-21.608
+-22.496
+-23.384
+-24.272
+-25.16
+-26.048
+-26.936
+-27.824
+-28.712

@@ -1,0 +1,36 @@
+n_order					3                 	!
+n_window        1  									! 
+n_startline			2										!start line number(Charles 1, NSAWET 2)
+n_points				1									  !48 points on one line
+windowtype			0										!window type, default
+filename				15_pres.dat						!filename
+filename        fft.P								!output
+kindVar					1										!1 pressure, 2 velocity
+kCode						2									!1 Charles, 2 NSAWET
+kpsd						1								!1 psd   2 f*psd/variance (contribution)         
+SoundSpeed      1								!dimensional
+MachNumber      1								!dimensional
+Density         1								!dimensional
+timestep        1								!non-dimensional
+length          1							  !dimensional
+
+
+
+
+
+# a long signal is divided into (n_window*2 - 1) section
+# average only occurs on the time dimension, without on spanwise dimension
+# output includs n_points	48 curves
+
+
+# attention
+# 3 sections + 2 overlaps
+# total points < 2**(n_order-1)*(n_window*2 - 1) = 2**11 * 3
+
+# total points should = 2**n_order*n_window
+
+
+# how to define n_window
+# if n_window is too large, the maximum period will be vert small, the minimum frequency will be very laege
+# n_window depend on practical condition and the time period which is already calculated
+

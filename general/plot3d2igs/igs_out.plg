@@ -1,0 +1,26 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: igs_out - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP14C.tmp" with contents
+[
+/check:noflawed_pentium /compile_only /nologo /real_size:64 /warn:nofileopt /module:"Release/" /object:"Release/" 
+"D:\test\IGStest\Source\igs_out.f90"
+]
+Creating command line "link.exe kernel32.lib /nologo /subsystem:console /incremental:no /pdb:"Release/igs.pdb" /machine:I386 /out:"igs.exe"  .\Release\igs_out.obj "
+<h3>Output Window</h3>
+Compiling Fortran...
+D:\test\IGStest\Source\igs_out.f90
+Linking...
+
+
+
+<h3>Results</h3>
+igs.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

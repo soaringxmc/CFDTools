@@ -1,0 +1,3 @@
+cfl3d.inp	!input file
+cfl3d.xyz	!coordinates
+1		!cpu number

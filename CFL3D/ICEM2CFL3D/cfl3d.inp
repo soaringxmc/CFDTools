@@ -1,0 +1,159 @@
+FILES:
+cfl3d.x
+field.g
+field.q
+cfl3d.out
+resid.out
+cfl3d.turres
+cfl3d.blomax
+cfl3d.2out
+cfl3d.prt
+cfl3d.press
+ovrlp.bin
+patch.bin
+cfl3d.restart
+>
+cprec 0
+ides 12
+iblend 1
+iteravg 1
+icoarsemovie 5
+i2dmovie 5
+isample 1
+cdes 0.61
+cdt1 8.0
+<
+CFL3D V6 INPUT FILE GENERATED WITH GRIDGEN
+     XMACH     ALPHA      BETA  REUE,MIL   TINF,DR     IALPH    IHSTRY
+     0.750     1.000    0.0000      3.00    460.00         1         0
+      SREF      CREF      BREF       XMC       YMC       ZMC
+      1.00      1.00      1.00      0.25      0.00      0.00
+        DT     IREST   IFLAGTS      FMAX     IUNST    CFLTAU
+       0.1         0       000      1.00         0    7.5000
+     NGRID   NPLOT3D    NPRINT    NWREST      ICHK       I2D    NTSTEP       ITA
+        -3         3        -1       500         0         0        20         1
+       NCG       IEM  IADVANCE    IFORCE  IVISC(I)  IVISC(J)  IVISC(K)
+         2         0         0       333         7         7         7
+         2         0         0       333         7         7         7
+         2         0         0       333         7         7         7
+      IDIM      JDIM      KDIM
+       397        37         9
+       377        37         9
+       341        13         9
+    ILAMLO    ILAMHI    JLAMLO    JLAMHI    KLAMLO    ILAMHI
+         0         0         0         0         0         0
+         0         0         0         0         0         0
+         0         0         0         0         0         0
+     INEWG    IGRIDC        IS        JS        KS        IE        JE        KE
+         0         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0         0
+  IDIAG(I)  IDIAG(J)  IDIAG(K)  IFLIM(I)  IFLIM(J)  IFLIM(K)
+         1         1         1         4         4         4
+         1         1         1         4         4         4
+         1         1         1         4         4         4
+   IFDS(I)   IFDS(J)   IFDS(K)  RKAP0(I)  RKAP0(J)  RKAP0(K)
+         1         1         1    0.3333    0.3333    0.3333
+         1         1         1    0.3333    0.3333    0.3333
+         1         1         1    0.3333    0.3333    0.3333
+      GRID     NBCIO   NBCIDIM     NBCJO   NBCJDIM     NBCKO   NBCKDIM    IOVRLP
+         1         1         1         3         2         1         1         0
+         2         1         1         1         2         1         1         0
+         3         1         1         1         1         1         1         0
+I0:   GRID   SEGMENT    BCTYPE      JSTA      JEND      KSTA      KEND     NDATA
+         1         1      2003         1        37         1         9         5
+                Mach   Pt/Pinf   Tt/Tinf    Alphae     Betae
+                 XXX       XXX       XXX       0.0       0.0
+         2         1      2003         1        37         1         9         5
+                Mach   Pt/Pinf   Tt/Tinf    Alphae     Betae
+                 XXX       XXX       XXX       0.0       0.0
+         3         1      2004         1        13         1         9         2
+              Twtype        Cq
+                 0.0       0.0
+IDIM: GRID   SEGMENT    BCTYPE      JSTA      JEND      KSTA      KEND     NDATA
+         1         1      2002         1        37         1         9         1
+              P/Pinf
+                 1.0
+         2         1      2002         1        37         1         9         1
+              P/Pinf
+                 1.0
+         3         1      2002         1        13         1         9         1
+              P/Pinf
+                 1.0
+J0:   GRID   SEGMENT    BCTYPE      ISTA      IEND      KSTA      KEND     NDATA
+         1         1      2004         1        21         1         9         2
+              Twtype        Cq
+                 0.0       0.0
+         1         2      2004        21        57         1         9         2
+              Twtype        Cq
+                 0.0       0.0
+         1         3         0        57       397         1         9         0
+         2         1      1005         1       377         1         9         0
+         3         1         0         1       341         1         9         0
+JDIM: GRID   SEGMENT    BCTYPE      ISTA      IEND      KSTA      KEND     NDATA
+         1         1      1005        21       397         1         9         0
+         1         2      1005         1        21         1         9         0
+         2         1      2004         1        37         1         9         2
+              Twtype        Cq
+                 0.0       0.0
+         2         2         0        37       377         1         9         0
+         3         1         0         1       341         1         9         0
+K0:   GRID   SEGMENT    BCTYPE      ISTA      IEND      JSTA      JEND     NDATA
+         1         1      2005         1       397         1        37         4
+              hgridp      dthx      dthy      dthz
+                   1       0.0       0.0       0.0
+         2         1      2005         1       377         1        37         4
+              hgridp      dthx      dthy      dthz
+                   2       0.0       0.0       0.0
+         3         1      2005         1       341         1        13         4
+              hgridp      dthx      dthy      dthz
+                   3       0.0       0.0       0.0
+KDIM: GRID   SEGMENT    BCTYPE      ISTA      IEND      JSTA      JEND     NDATA
+         1         1      2005         1       397         1        37         4
+              hgridp      dthx      dthy      dthz
+                   1       0.0       0.0       0.0
+         2         1      2005         1       377         1        37         4
+              hgridp      dthx      dthy      dthz
+                   2       0.0       0.0       0.0
+         3         1      2005         1       341         1        13         4
+              hgridp      dthx      dthy      dthz
+                   3       0.0       0.0       0.0
+      MSEQ    MGFLAG    ICONSF       MTT      NGAM
+         1         1         0         0         2
+      ISSC EPSSSC(1) EPSSSC(2) EPSSSC(3)      ISSR EPSSSR(1) EPSSSR(2) EPSSSR(3)
+         0       0.3       0.3       0.3         0       0.3       0.3       0.3
+      NCYC    MGLEVG     NEMGL     NITFO
+         2         3         0         0
+      MIT1      MIT2      MIT3      MIT4      MIT5      MIT6      MIT7      MIT8
+         1         1         1         1         1         1         1         1
+   1-1 BLOCKING DATA:
+      NBLI
+         2
+   NUMBER   GRID   :   ISTA   JSTA   KSTA   IEND   JEND   KEND  ISVA1  ISVA2
+        1      1         57      1      1    397      1      9      1      3
+        2      2         37     37      1    377     37      9      1      3
+   NUMBER   GRID   :   ISTA   JSTA   KSTA   IEND   JEND   KEND  ISVA1  ISVA2
+        1      3          1     13      1    341     13      9      1      3
+        2      3          1      1      1    341      1      9      1      3
+  PATCH SURFACE DATA:
+    NINTER
+         0
+PLOT3D OUTPUT:
+  GRID  IPTYPE  ISTART  IEND  IINC  JSTART  JEND  JINC  KSTART  KEND  KINC
+     1      -2       0     0     0       0     0     0       0     0     0
+     2      -2       0     0     0       0     0     0       0     0     0
+     3      -2       0     0     0       0     0     0       0     0     0
+ UPDATE
+     0
+  PRINT OUT:
+  GRID  IPTYPE  ISTART  IEND  IINC  JSTART  JEND  JINC  KSTART  KEND  KINC
+     1       0       0     0     0       0     0     0       0     0     0
+ SAMPLING POINTS:
+ NSMP
+    1
+  GRID  IPTYPE  ISTART  IEND  IINC  JSTART  JEND  JINC  KSTART  KEND  KINC
+     1	     1       1     1     1       1     1     1       1     1     1
+ CONTROL SURFACE:
+ NCS
+   0
+  GRID  ISTART    IEND  JSTART    JEND  KSTART    KEND   IWALL   INROM
