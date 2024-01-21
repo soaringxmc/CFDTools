@@ -1,14 +1,13 @@
 # Ignore compiled files
-*.o
-*.mod
+**/*.o
+**/*.mod
 
 # Ignore temporary files and directories
-tmp/
-temp/
+**/tmp/
+**/temp/
 
 # Ignore log files
-*.log
+**/*.log
 
 # Ignore data files
-*.bin
-*/*/*.bin
+**/*.bin
