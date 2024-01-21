@@ -11,3 +11,4 @@ temp/
 
 # Ignore data files
 *.bin
+*/*/*.bin
