@@ -1,0 +1,24 @@
+ N1  N2  N3   NSST(>1=RK,else AB) NREAD     IMPLTH     RIMPL       ISEC
+ 769  97   769             3             1      -1      0.25        0
+ NTST      TMAX    IRESET
+1000000  4500.0     0
+ ALX3D     ISTR3     STR3
+ 15.0000    -1        30.0
+ REXT      ISTR      STR     ASTR
+ 1.000     7         3.00    0.35
+ RE        ROS       PRA     DT      RESID    CFLMAX
+ 1.7e+4    1.0        1.      0.05    1.e3     1.2
+ inslwr    icorio    uwall
+  1         1        -0.
+ TSTA     PRINTFREQ  CHECKFREQ
+ 100      100        5000
+ DTMAX(per dt var.)
+ 1.01
+ NSON
+   1
+ TFRAME     TFRAME3
+ 5.0        1000.00
+ wallmax
+ 80000
+ Amplitude   Axial mode    Period
+  0.0          0            -1.
