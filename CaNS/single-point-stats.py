@@ -109,7 +109,7 @@ shuffle_data   = False
 import sys
 args = sys.argv[1:]
 casedir = args[3] if len(args) > 3 else ''
-datadir = casedir+'data/'
+datadir = casedir+''
 print('Data directory: ' + datadir+'\n')
 resultsdir = casedir+'results/'
 import os
@@ -117,6 +117,7 @@ os.makedirs(resultsdir,exist_ok=True)
 #
 # import parameters
 #
+sys.path.append(casedir) # put input.py in the case directory
 from input import *
 visc = visci**(-1)
 reb = 2*h*ub/visc
@@ -255,6 +256,7 @@ omz2 = np.zeros(nz)
 for ifld in flds[:]:
     #
     fname = fname_beg+str(ifld).zfill(7)+fname_ext
+    print(fname)
     data = np.loadtxt(fname)
     #
     zc       = data[:,izc]
