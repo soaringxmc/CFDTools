@@ -644,7 +644,7 @@ def cmpt_std_err(arr):
 dpdx_avg = np.mean(-dpdx_arr[:])
 dpdx_std = np.std(dpdx_arr[:])
 dpdx_err = cmpt_std_err(dpdx_arr[:])
-utau_arr = (-dpdx_arr[:]*h)**.5
+utau_arr = (-dpdx_arr[:]*h)**.5 # utau = sqrt(-dpdx*h)
 utau_avg = np.mean(utau_arr[:])
 utau_err = cmpt_std_err(utau_arr[:])
 retau_arr = utau_arr*h/visc
