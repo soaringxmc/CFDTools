@@ -34,3 +34,6 @@ nu    = prop[3]
 delv  = nu/utau
 
 np.savetxt('stats.txt', np.column_stack((retau, utau, delv)), fmt='%15.8f %15.8f %15.8f')
+np.savetxt('stats-single-point-chan-00180.out', stat, fmt='%15.8f', delimiter='')
+# default delimiter is a blank space
+# delimiter='' musst be specified to have the same format as F15.8 in Fortran
