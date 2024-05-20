@@ -3,13 +3,15 @@ import sys
 import os
 import glob
 
-sys.path.append('')
+sys.path.append('') # input.py in the working directory, rather than the directory of this script
+
 from input import *
 
 nt = 0
 pattern = 'channel.???????.stats.txt'
 with open('forcing.out', 'w') as fileout:
-  for filename in glob.glob(pattern):
+  for filename in sorted(glob.glob(pattern)):
+    # glob.glob has the same order as ls -U, unordered by default
     with open(filename, 'r') as filein:
       first_line = filein.readline().split()
       fileout.write(' '.join(first_line[1:]) + '\n')
