@@ -50,16 +50,14 @@
        allocate(wvar(m2m,30),wvarav(m2m,30))
        allocate(cfl(m2m,3),cflav(m2m,3))
 !
-       open(9,file='ave.in',form='formatted')
-       read(9,*) ibeg,iend
-       close(9)
+       read(*,*) ibeg,iend
 !
 !      Read wmean
 !
        wvarav=0.
        do l=ibeg,iend
         write(naitav,'(I4.4)') l
-        open(10,file='../wmean_'//naitav//'.dat',form='formatted') 
+        open(10,file='wmean_'//naitav//'.dat',form='formatted') 
         do j=1,m2m
          read(10,*) rc(j),rm(j),(wvar(j,n),n=1,30)
         enddo
@@ -78,7 +76,7 @@
        cflav=0.
        do l=ibeg,iend
         write(naitav,'(I4.4)') l
-        open(10,file='../cfl_'//naitav//'.dat',form='formatted')
+        open(10,file='cfl_'//naitav//'.dat',form='formatted')
         do j=1,m2m
          read(10,*) rc(j),rm(j),(cfl(j,n),n=1,3)
         enddo
@@ -98,7 +96,7 @@
        do itav=ibeg,iend
         print *,'PDF sample',itav
         write(naitav,1004) itav 
-        open(10,file='../pdf_'//naitav//'.bin',form='unformatted')
+        open(10,file='pdf_'//naitav//'.bin',form='unformatted')
         read(10) pdfl
         close(10)
         pdf=pdf+pdfl
@@ -112,7 +110,7 @@
        do itav=ibeg,iend
         print *,'JPDF sample',itav
         write(naitav,1004) itav 
-        open(10,file='../jpdf_'//naitav//'.bin',form='unformatted')
+        open(10,file='jpdf_'//naitav//'.bin',form='unformatted')
         read(10) jpdfl
         close(10)
         jpdf=jpdf+jpdfl
@@ -132,7 +130,7 @@
          do itav=ibeg,iend
           print *,'Budget',l,m,itav
           write(naitav,1004) itav 
-          open(10,file='../budget_'//nal//nam//'_'//naitav//'.dat',
+          open(10,file='budget_'//nal//nam//'_'//naitav//'.dat',
      .          form='formatted') 
           do j=1,m2m
            read(10,100) rc(j),rm(j),wavl(j,1:nbudget)
@@ -157,7 +155,7 @@
        wav=0.
        do itav=ibeg,iend
         write(naitav,1004) itav
-        open(10,file='../budget_'//nal//nam//'_'//naitav//'.dat',
+        open(10,file='budget_'//nal//nam//'_'//naitav//'.dat',
      .        form='formatted')
         do j=1,m2m
          read(10,100) rc(j),rm(j),wavl(j,1:nbudget)
@@ -179,7 +177,7 @@
         do itav=ibeg,iend
          print *,'Flux',l,itav
          write(naitav,1004) itav 
-         open(10,file='../flux_'//nal//'_'//naitav//'.dat',
+         open(10,file='flux_'//nal//'_'//naitav//'.dat',
      .          form='formatted') 
          do j=1,m2m
           read(10,100) rc(j),rm(j),flul(j,l,1:3)
@@ -202,7 +200,7 @@
        do itav=ibeg,iend
         print *,'Theta spectra, sample',itav
         write(naitav,1004) itav 
-        open(10,file='../specth_'//naitav//'.bin',form='unformatted')
+        open(10,file='specth_'//naitav//'.bin',form='unformatted')
         read(10) spectl
         close(10)
         spect=spect+spectl
@@ -216,7 +214,7 @@
        do itav=ibeg,iend
         print *,'Zeta spectra, sample',itav
         write(naitav,1004) itav 
-        open(10,file='../specze_'//naitav//'.bin',form='unformatted')
+        open(10,file='specze_'//naitav//'.bin',form='unformatted')
         read(10) speczl
         close(10)
         specz=specz+speczl
@@ -230,7 +228,7 @@
        do itav=ibeg,iend
         print *,'Theta0 spectra, sample',itav
         write(naitav,1004) itav 
-        open(10,file='../specth0_'//naitav//'.bin',form='unformatted')
+        open(10,file='specth0_'//naitav//'.bin',form='unformatted')
         read(10) spect0l
         close(10)
         spect0=spect0+spect0l
@@ -256,7 +254,7 @@
           print *,'2D spectra: plane, variable, sample',
      .     l,m,itav
 !
-          open(10,file='../spec2d'//naplan//'_'//navar//'_'//naitav//
+          open(10,file='spec2d'//naplan//'_'//navar//'_'//naitav//
      .         '.bin' ,form='unformatted')
           read(10) spec2dl
           print *,minval(spec2dl(:,:)),maxval(spec2dl(:,:))
