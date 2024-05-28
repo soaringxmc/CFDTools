@@ -1,8 +1,28 @@
+from scipy.interpolate import interp1d
 import numpy as np
 import sys
 import os
 import re
 import glob
+#
+# profile folding function
+#
+def fold_2d(var, cf='C', isym2=1, isym1=1):
+  # support cf='C' and even numbers of cells
+  isym = isym2*isym1
+  if(abs(isym) != 1): exit()
+  n2, n1 = var.shape
+  s = 0
+  if cf == 'F':
+    s = 1
+  var[0:n2//2-s:+1, 0:n1//2-s:+1] =      (var[     0:n2//2-s:+1, 0:n1//2-s:+1] + \
+                                    isym2*var[n2-1-s:n2//2-1:-1, 0:n1//2-s:+1] + \
+                                    isym1*var[     0:n2//2-s:+1, n1-1-s:n1//2-1:-1] + \
+                                    isym *var[n2-1-s:n2//2-1:-1, n1-1-s:n1//2-1:-1])*0.25
+  var[n2//2-s:n2:+1,  0:n1//2-s:+1] = isym2*var[0:n2//2-s:+1, 0:n1//2-s:+1][::-1, :   ]
+  var[ 0:n2//2-s:+1, n1//2-s:n1:+1] = isym1*var[0:n2//2-s:+1, 0:n1//2-s:+1][   :, ::-1]
+  var[n2//2-s:n2:+1, n1//2-s:n1:+1] = isym *var[0:n2//2-s:+1, 0:n1//2-s:+1][::-1, ::-1]
+  return var
 #
 # compute mean pressure gradient
 #
@@ -97,7 +117,8 @@ if(shuffle_data):
 flds = flds[0:nflds]
 norm = 1/nflds
 grid = np.loadtxt(datadir+'geometry.out')
-nz   = int(grid[0,2])
+n1 = int(grid[0,1])
+n2 = int(grid[0,2])
 #
 # single point statistics
 #
@@ -111,23 +132,88 @@ for ifld in flds[:]:
     else:
         data_avg += data
 data_avg = data_avg*norm
-data_avg[:,0] = data[:,0]
-data_avg[:,1] = data[:,1]
+#
+yc    = np.reshape(data    [:,0],(n2,n1),order='C')
+zc    = np.reshape(data    [:,1],(n2,n1),order='C')
+u1    = np.reshape(data_avg[:,2],(n2,n1),order='C')
+v1    = np.reshape(data_avg[:,3],(n2,n1),order='C')
+w1    = np.reshape(data_avg[:,4],(n2,n1),order='C')
+u2    = np.reshape(data_avg[:,5],(n2,n1),order='C')
+v2    = np.reshape(data_avg[:,6],(n2,n1),order='C')
+w2    = np.reshape(data_avg[:,7],(n2,n1),order='C')
+uv    = np.reshape(data_avg[:,8],(n2,n1),order='C')
+uw    = np.reshape(data_avg[:,9],(n2,n1),order='C')
+#
+u1 = fold_2d(u1,cf='C',isym2=+1, isym1=+1)
+v1 = fold_2d(v1,cf='C',isym2=+1, isym1=-1)
+w1 = fold_2d(w1,cf='C',isym2=-1, isym1=+1)
+u2 = fold_2d(u2,cf='C',isym2=+1, isym1=+1)
+v2 = fold_2d(v2,cf='C',isym2=+1, isym1=+1)
+w2 = fold_2d(w2,cf='C',isym2=+1, isym1=+1)
+uv = fold_2d(uv,cf='C',isym2=+1, isym1=-1)
+uw = fold_2d(uw,cf='C',isym2=-1, isym1=+1)
+#
+u2[:] -= u1[:]**2
+v2[:] -= v1[:]**2
+w2[:] -= w1[:]**2
+uv[:] -= u1[:]*v1[:]
+uw[:] -= u1[:]*w1[:]
+#
+data_avg[:,0] = np.reshape(yc,(n1*n2),order='C')
+data_avg[:,1] = np.reshape(zc,(n1*n2),order='C')
+data_avg[:,2] = np.reshape(u1,(n1*n2),order='C')
+data_avg[:,3] = np.reshape(v1,(n1*n2),order='C')
+data_avg[:,4] = np.reshape(w1,(n1*n2),order='C')
+data_avg[:,5] = np.reshape(u2,(n1*n2),order='C')
+data_avg[:,6] = np.reshape(v2,(n1*n2),order='C')
+data_avg[:,7] = np.reshape(w2,(n1*n2),order='C')
+data_avg[:,8] = np.reshape(uv,(n1*n2),order='C')
+data_avg[:,9] = np.reshape(uw,(n1*n2),order='C')
 #
 fname = resultsdir + 'stats-single-point-duct-' + casename + fname_ext
 with open(fname, 'w') as file:
-  file.write('ZONE I=128, J=128, DATAPACKING=POINT\n')
-  np.savetxt(file, data_avg, fmt='%16.6e', delimiter='') 
-  # (fortran, e16.7) equivalent to (python,16,6e)
+    file.write('ZONE I=128, J=128, DATAPACKING=POINT\n')
+    np.savetxt(file, data_avg, fmt='%16.6e', delimiter='') 
+    # (e16.7,fortran) is equivalent to (16.6e,python)
 
-# utau_s = ((u1[0]+uconv)/zc[0]*visc)**.5
-# uc     = u1[nz//2-1]+ub # convective reference frame
-# uu_max = np.max(u2[:])
-# uw_max = np.max(uw[:])
-# print("Friction Reynolds number obtained from the velocity gradient at the wall: ", utau_s*h/visc)
-# print("Centreline velocity:                  ", uc)
-# print("Maximum streamwise velocity variance: ", uu_max)
-# print("Maximum Reynolds shear stresses:      ", uw_max)
-
-# do average of four corners
-# plot centerline profiles as in Pedro's paper
+def interp(n2, n1, y, u, h):
+    u1_cl = np.zeros(n2)
+    for k in range(n2):
+      f = interp1d(y[k,n1//2-3:n1//2], u[k,n1//2-3:n1//2], kind='quadratic', fill_value='extrapolate')
+      u1_cl[k] = f(h)
+    return u1_cl
+#
+# bisector statistics
+#
+n2, n1 = zc.shape
+yc_cl = yc[:,n1//2-1]
+zc_cl = zc[:,n1//2-1]
+u1_cl = interp(n2, n1, yc, u1, h)
+v1_cl = interp(n2, n1, yc, v1, h)
+w1_cl = interp(n2, n1, yc, w1, h)
+u2_cl = interp(n2, n1, yc, u2, h)
+v2_cl = interp(n2, n1, yc, v2, h)
+w2_cl = interp(n2, n1, yc, w2, h)
+uv_cl = interp(n2, n1, yc, uv, h)
+uw_cl = interp(n2, n1, yc, uw, h)
+fname = resultsdir + 'stats-single-point-duct-centerline-' + casename + fname_ext
+with open(fname, 'w') as file:
+    np.savetxt(file, np.c_[zc_cl,u1_cl,v1_cl,w1_cl,u2_cl,v2_cl,w2_cl,uv_cl,uw_cl], \
+               fmt='%16.6e', delimiter='')
+#
+# diagonal statistics, uniform grid in the cross-section
+#
+yc_diag = np.diag(yc)
+zc_diag = np.diag(zc)
+u1_diag = np.diag(u1)
+v1_diag = np.diag(v1)
+w1_diag = np.diag(w1)
+u2_diag = np.diag(u2)
+v2_diag = np.diag(v2)
+w2_diag = np.diag(w2)
+uv_diag = np.diag(uv)
+uw_diag = np.diag(uw)
+fname = resultsdir + 'stats-single-point-duct-diagonal-' + casename + fname_ext
+with open(fname, 'w') as file:
+    np.savetxt(file, np.c_[zc_diag,u1_diag,v1_diag,w1_diag,u2_diag,v2_diag,w2_diag,uv_diag,uw_diag], \
+               fmt='%16.6e', delimiter='')
