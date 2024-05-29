@@ -172,8 +172,8 @@ data_avg[:,9] = np.reshape(uw,(n1*n2),order='C')
 #
 fname = resultsdir + 'stats-single-point-duct-' + casename + fname_ext
 with open(fname, 'w') as file:
-    file.write('ZONE I=128, J=128, DATAPACKING=POINT\n')
-    np.savetxt(file, data_avg, fmt='%16.6e', delimiter='') 
+    file.write(f'ZONE I={n1}, J={n2}, DATAPACKING=POINT\n')
+    np.savetxt(file, data_avg, fmt='%16.6e', delimiter='')
     # (e16.7,fortran) is equivalent to (16.6e,python)
 
 def interp(n2, n1, y, u, h):
